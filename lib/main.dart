@@ -66,6 +66,11 @@ class MyAppState extends ChangeNotifier {
     }
     notifyListeners();
   }
+
+  void RemoveFavorite(WordPair wordFave) {
+    favorites.remove(wordFave);
+    notifyListeners();
+  }
 }
 
 class MyHomePage extends StatelessWidget {
@@ -345,19 +350,27 @@ class SecondRoute extends StatelessWidget {
     }
 
     return Scaffold(
-        body: Row(
-      children: [
+      body: Column(children: [
         Padding(
           padding: const EdgeInsets.all(20),
           child: Text('You have '
               '${appState.favorites.length} favorites:'),
         ),
         for (var pair in appState.favorites)
-          ListTile(
-            leading: Icon(Icons.favorite),
-            title: Text(pair.asLowerCase),
+          Row(
+            children: [
+              ElevatedButton.icon(
+                onPressed: () {
+                  appState.RemoveFavorite(pair);
+                  print(appState.favorites);
+                },
+                icon: Icon(Icons.favorite),
+                label: Text('Like'),
+              ),
+              BigCard(pair: pair)
+            ], //children
           ),
-      ],
-    ));
+      ]),
+    );
   }
 }
