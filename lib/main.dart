@@ -350,6 +350,10 @@ class SecondRoute extends StatelessWidget {
     }
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(0xFF4392C0),
+        title: Text('Favorites'),
+      ),
       body: Column(children: [
         Padding(
           padding: const EdgeInsets.all(20),
